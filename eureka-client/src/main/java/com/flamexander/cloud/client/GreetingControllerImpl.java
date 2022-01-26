@@ -25,6 +25,11 @@ public class GreetingControllerImpl implements GreetingController {
         return String.format("Hello from '%s'!", eurekaClient.getApplication(appName).getName());
     }
 
+    @Override
+    public String parametrized(String id) {
+        return null;
+    }
+
     @GetMapping("/abc")
     public String test() {
         return username;

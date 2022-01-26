@@ -8,6 +8,7 @@ services:
             - "8761:8761"
         networks:
             - eureka_network
+
     eureka_client:
         build:
             context: ./eureka-client
@@ -19,16 +20,18 @@ services:
             - "config_server"
         networks:
             - eureka_network
-#    eureka_feign_client:
-#        build:
-#            context: ./eureka-feign-client
-#        container_name: "eureka-feign-client-container"
-#        ports:
-#            - "8190:8190"
-#        depends_on:
-#            - "eureka_client"
-#        networks:
-#            - eureka_network
+
+    eureka_feign_client:
+        build:
+            context: ./eureka-feign-client
+        container_name: "eureka-feign-client-container"
+        ports:
+            - "8190:8190"
+        depends_on:
+            - "eureka_client"
+        networks:
+            - eureka_network
+
     config_server:
         build:
             context: ./config-server
@@ -39,6 +42,7 @@ services:
             - "eureka_service"
         networks:
             - eureka_network
+
 #    zuul_server:
 #        build:
 #            context: ./zuul-server
